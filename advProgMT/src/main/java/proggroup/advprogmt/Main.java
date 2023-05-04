@@ -12,8 +12,8 @@ public class Main extends Application {
     public void start(Stage mainStage){
         MainStage=mainStage;
 
-        LoginWindow.Login();
-        HomeWindow.Home();
+        LoginWindow.login();
+        HomeWindow.home();
 
         mainSetup();
         mainStage.show();
@@ -40,6 +40,9 @@ public class Main extends Application {
                 HomeWindow.ctrlStage();
             };
         }
+        MainStage.setOnCloseRequest(event -> {
+            HomeWindow.cp.close();
+        });
     }
     public void homeScreen(){
         MainStage.setTitle("Library System - Home - " + User.type + ": " + User.userName);
@@ -54,7 +57,9 @@ public class Main extends Application {
         LoginWindow.textField1.clear();
         LoginWindow.passField.clear();
         HomeWindow.searchbar.clear();
+        HomeWindow.cp.close();
+        HomeWindow.type.getItems().remove("Users");
         HomeWindow.bp.setCenter(null);
-        HomeWindow.type.setValue("Book");
+        HomeWindow.type.setValue("Books");
     }
 }

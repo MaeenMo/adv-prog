@@ -22,7 +22,7 @@ public class Login{
     Label label3 = new Label();
     Button loginBtn = new Button("Login");
 
-    public void Login (){
+    public void login (){
         label1.setStyle("-fx-font-weight:bold");
         textField1.setPromptText("Enter Your Username");
         textField1.setStyle("-fx-background-radius:15");
@@ -90,26 +90,6 @@ public class Login{
             passShown.setVisible(false);
         };
     }
-//    public void logIn(){
-//        onClick(LoginWindow.textField1, LoginWindow.passField, LoginWindow.passShown, LoginWindow.label3);
-//        if(Login.UserIsAuth) {
-//            MainStage.setTitle("Library System - Home - " + Validation.Type + ": " + Validation.Username);
-//            label3.setText("");
-//            new Alert().display("Welcome "+Validation.Type,"Login Successful!","green");
-//            MainStage.setScene(HomeWindow.homeScene);
-//            HomeWindow.checkType();
-//        }
-//    }
-//    public void logOut(){
-//        MainStage.setTitle("Library System - Login");
-//        MainStage.setScene(LoginWindow.loginScene);
-//        Login.UserIsAuth =false;
-//        loginBtn.setOnAction(event -> logIn());
-//        showPass.setGraphic(hideIco);
-//        HomeWindow.searchbar.clear();
-//        HomeWindow.bp.setCenter(null);
-//        HomeWindow.type.setValue("Book");
-//    }
 }
 
 

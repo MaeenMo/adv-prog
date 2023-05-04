@@ -27,8 +27,6 @@ public class Home{
     BorderPane bp = new BorderPane();
     HBox topMenu = new HBox();
     HBox body = new HBox();
-//    VBox body = new VBox();
-//    ListView<String> listView = new ListView<>();
     TextField searchbar = new TextField();
     Button searchBtn = new Button("Search");
     Button ctrlPanel = new Button();
@@ -42,7 +40,9 @@ public class Home{
     static boolean ctrlPanel_opened = true;
 //    static Button rent = new Button("Rent");
     Search search = new Search();
-    public void Home(){
+    Librarian librarian = new Librarian();
+    Reader reader = new Reader();
+    public void home(){
         searchbar.setPromptText("Search");
         searchbar.setMinWidth(240);
         searchbar.setStyle("-fx-focus-color:grey;");
@@ -53,14 +53,16 @@ public class Home{
             search.searchfor(searchbar.getText(), type.getValue());
             bp.setCenter(null);
             if (search.i==0) {
-                searchedBooks();
-//                bp.setLeft(null);
+                if (User.type.equals("Librarian")){
+                    if(type.getValue().equals("Users")){
+                        bp.setCenter(librarian.searchUsers());
+                    }else bp.setCenter(librarian.searchBooks());
+                }else bp.setCenter(reader.searchBooks());
             }else {
                 bp.setCenter(null);
                 System.out.println(search.result +"from home");
                 text.setText(search.result);
                 bp.setCenter(body);
-//                bp.setCenter(null);
             }
 //            text.setText(search.booksArr[search.i]);
         });
@@ -72,8 +74,8 @@ public class Home{
         });
 
         type = new ComboBox<>();
-        type.getItems().addAll("Book","User");
-        type.setValue("Book");
+        type.getItems().addAll("Books");
+        type.setValue("Books");
         type.setTranslateX(12);
         type.setStyle("-fx-focus-color:transparent;-fx-faint-focus-color:transparent");
 
@@ -95,6 +97,7 @@ public class Home{
             controlPanel.root.getChildren().clear();
             Home.ctrlPanel_opened = false;
         });
+
 
         icon2.setFitHeight(20);
         icon2.setPreserveRatio(true);
@@ -127,6 +130,8 @@ public class Home{
     }
     public void checkType(){
         ctrlPanel.setVisible(!User.type.equals("Reader"));
+        if (!User.type.equals("Reader"))
+            type.getItems().add("Users");
     }
 
     public void ctrlStage(){
@@ -140,52 +145,22 @@ public class Home{
 //        Label label = new Label();
 //        Button button = new Button();
         Label text = new Label();
-        Button rent = new Button("Rent");
+        Button rent = new Button();
 
-        HBoxCell(String labelText, String buttonText) {
+        HBoxCell(String labelText, String buttonText, String color) {
             super();
             text.setStyle("-fx-font-size:16");
             text.setText(labelText);
             text.setMaxWidth(Double.MAX_VALUE);
             HBox.setHgrow(text, Priority.ALWAYS);
-
+            rent.setOnAction(e->{
+                System.out.println(labelText + " button pressed");
+            });
             rent.setText(buttonText);
-            rent.setStyle("-fx-background-radius:7;-fx-focus-color:transparent;-fx-faint-focus-color:transparent;-fx-background-color:limegreen;-fx-cursor:hand;");
+            rent.setStyle("-fx-background-radius:7;-fx-focus-color:transparent;-fx-faint-focus-color:transparent;-fx-background-color:"+ color +";-fx-cursor:hand;");
             rent.setPadding(new Insets(5,40,5,40));
             this.getChildren().addAll(text, rent);
         }
-    }
-
-    public void searchedBooks() {
-        ArrayList<HBoxCell> list = new ArrayList<>();
-
-        for (String i: search.booksArr) {
-            if (i!= null) {
-                System.out.println("element "+ i + " added");
-                list.add(new HBoxCell(i, "Rent"));
-            }
-        }
-
-        ListView<HBoxCell> listView = new ListView<>();
-        ObservableList<HBoxCell> myObservableList = FXCollections.observableList(list);
-        listView.setItems(myObservableList);
-        bp.setCenter(listView);
-    }
-
-    public void searchedUsers() {
-        ArrayList<HBoxCell> list = new ArrayList<>();
-
-//        for (String i: search.booksArr) {
-//            if (i!= null) {
-//                System.out.println("element "+ i + " added");
-//                list.add(new HBoxCell(i, "Rent"));
-//            }
-//        }
-
-        ListView<HBoxCell> listView = new ListView<>();
-        ObservableList<HBoxCell> myObservableList = FXCollections.observableList(list);
-        listView.setItems(myObservableList);
-        bp.setCenter(listView);
     }
 
     ///////////////////////////////////////////////////////////////////////////////////

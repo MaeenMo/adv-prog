@@ -21,10 +21,11 @@ public class User {
     static BufferedReader brv;
     static String temp;
     static boolean isBlocked = false;
+    Search search = new Search();
     public User(){
 
     };
-    public User(String Username,String Password,String Type,String FirstName,String LastName,String Address,int CellPhone,String Email){
+    public User(String Username,String Password,String type,String FirstName,String LastName,String Address,int CellPhone,String Email){
         this.userName=Username;
         this.password=Password;
         this.type=type;
@@ -85,15 +86,7 @@ public class User {
             return false;
         }
             return true;
-//        else if (!(username.getText().isEmpty() && password.getText().isEmpty() && passShown.getText().isEmpty())) {
-//
-//            valid(username, password, msg);
-//
-//            passShown.clear();
-//            password.clear();
-//        }
     }
-
 
 //    public String getUserData() {
 //        return Username + "," + Password + "," + Type + "," + FirstName + "," + LastName + "," + Address + "," + CellPhone + "," + Email + "," + isBlocked;
