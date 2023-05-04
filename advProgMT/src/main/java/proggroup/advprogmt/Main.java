@@ -2,6 +2,7 @@ package proggroup.advprogmt;
 
 import javafx.application.Application;
 import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -57,6 +58,8 @@ public class Main extends Application {
         LoginWindow.textField1.clear();
         LoginWindow.passField.clear();
         HomeWindow.searchbar.clear();
+        HomeWindow.controlPanel.root.getChildren().clear();
+        HomeWindow.controlPanel.root = new VBox();
         HomeWindow.cp.close();
         HomeWindow.type.getItems().remove("Users");
         HomeWindow.bp.setCenter(null);

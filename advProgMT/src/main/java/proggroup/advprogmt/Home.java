@@ -1,7 +1,5 @@
 package proggroup.advprogmt;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -15,9 +13,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Home{
     ControlPanel controlPanel = new ControlPanel();
@@ -38,7 +33,6 @@ public class Home{
     ImageView icon2 = new ImageView(new Image(Home.class.getResourceAsStream("exit.png")));
     Label text = new Label();
     static boolean ctrlPanel_opened = true;
-//    static Button rent = new Button("Rent");
     Search search = new Search();
     Librarian librarian = new Librarian();
     Reader reader = new Reader();
@@ -49,7 +43,6 @@ public class Home{
 
         searchBtn.setStyle("-fx-focus-color:transparent;-fx-faint-focus-color:transparent;-fx-cursor:hand;");
         searchBtn.setOnAction(e -> {
-
             search.searchfor(searchbar.getText(), type.getValue());
             bp.setCenter(null);
             if (search.i==0) {
@@ -64,7 +57,6 @@ public class Home{
                 text.setText(search.result);
                 bp.setCenter(body);
             }
-//            text.setText(search.booksArr[search.i]);
         });
         searchbar.setOnKeyPressed(e -> {
             if (e.getCode().equals(KeyCode.ENTER)) {
@@ -92,12 +84,14 @@ public class Home{
                 Home.ctrlPanel_opened = true;
             }else alert.display("Error","Control Panel is already opened!","red");
         });
+
         cp.setOnCloseRequest(event -> {
             System.out.println("Stage is closing");
             controlPanel.root.getChildren().clear();
+            controlPanel.root = new VBox();
+            controlPanel.root.getChildren().clear();
             Home.ctrlPanel_opened = false;
         });
-
 
         icon2.setFitHeight(20);
         icon2.setPreserveRatio(true);
@@ -112,17 +106,9 @@ public class Home{
         topMenu.setStyle("-fx-background-color:lightgrey");
         topMenu.getChildren().addAll(searchbar,searchBtn,type,ctrlPanel,logOut);
 
-
         text.setStyle("-fx-font-size:16");
         body.getChildren().addAll(text);
         body.setAlignment(Pos.TOP_CENTER);
-//        rent.setStyle("-fx-background-radius:7;-fx-focus-color:transparent;-fx-faint-focus-color:transparent;-fx-background-color:limegreen;-fx-cursor:hand;");
-//        rent.setPadding(new Insets(5,40,5,40));
-
-//        String [] arr = new String[]{"a", "b", "c","d","d","d","d","d","d","d","d","d","d","d","d","d","d","d","d"};
-
-//        listView.setPadding(new Insets(20,80,20,80));
-//        listView.getItems().addAll(arr);
 
         bp.setTop(topMenu);
 
@@ -133,21 +119,16 @@ public class Home{
         if (!User.type.equals("Reader"))
             type.getItems().add("Users");
     }
-
     public void ctrlStage(){
         controlPanel.start(cp);
         ctrlPanel_opened = true;
     }
-
-    /////////////////////////////////////////////////////////////////////////////////////////////
-
     public static class HBoxCell extends HBox {
-//        Label label = new Label();
-//        Button button = new Button();
         Label text = new Label();
         Button rent = new Button();
-
-        HBoxCell(String labelText, String buttonText, String color) {
+        Button remove = new Button();
+        boolean visible;
+        HBoxCell(String labelText, String buttonText1, String color1, String buttonText2, String color2, String type) {
             super();
             text.setStyle("-fx-font-size:16");
             text.setText(labelText);
@@ -156,12 +137,21 @@ public class Home{
             rent.setOnAction(e->{
                 System.out.println(labelText + " button pressed");
             });
-            rent.setText(buttonText);
-            rent.setStyle("-fx-background-radius:7;-fx-focus-color:transparent;-fx-faint-focus-color:transparent;-fx-background-color:"+ color +";-fx-cursor:hand;");
-            rent.setPadding(new Insets(5,40,5,40));
-            this.getChildren().addAll(text, rent);
+            remove.setOnAction(e->{
+                System.out.println(labelText + " removed");
+            });
+            if (type.equals("Librarian")) {
+                visible = true;
+            }else visible = false;
+            remove.setText(buttonText2);
+            remove.setStyle("-fx-background-radius:7;-fx-focus-color:transparent;-fx-faint-focus-color:transparent;-fx-background-color:"+ color2 +";-fx-cursor:hand;");
+            remove.setPadding(new Insets(5,30,5,30));
+            remove.setVisible(visible);
+            rent.setText(buttonText1);
+            rent.setStyle("-fx-background-radius:7;-fx-focus-color:transparent;-fx-faint-focus-color:transparent;-fx-background-color:"+ color1 +";-fx-cursor:hand;");
+            rent.setPadding(new Insets(5,38,5,38));
+            this.getChildren().addAll(text, remove,rent);
+            HBox.setMargin(remove, new Insets(0,10,0,0));
         }
     }
-
-    ///////////////////////////////////////////////////////////////////////////////////
 }

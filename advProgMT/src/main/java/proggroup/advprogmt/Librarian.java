@@ -42,7 +42,7 @@ public class Librarian extends User{
         for (String i: Search.usersArr) {
             if (i!= null) {
                 System.out.println("user "+ i + " added");
-                list.add(new Home.HBoxCell(i, "remove","red"));
+                list.add(new Home.HBoxCell(i, "remove","red","","","Librarian"));
             }
         }
         ListView<Home.HBoxCell> listView = new ListView<>();
@@ -55,13 +55,14 @@ public class Librarian extends User{
         for (String i: search.booksArr) {
             if (i!= null) {
                 System.out.println("element "+ i + " added");
-                list.add(new Home.HBoxCell(i, "Rent","limegreen"));
-
+                list.add(new Home.HBoxCell(i, "Rent","limegreen","Remove","crimson","Librarian"));
             }
         }
         ListView<Home.HBoxCell> listView = new ListView<>();
         ObservableList<Home.HBoxCell> myObservableList = FXCollections.observableList(list);
         listView.setItems(myObservableList);
+
+        listView.setStyle("-fx-background-radius:0;-fx-focus-color:transparent;-fx-faint-focus-color:transparent;-fx-background-color:black;-fx-cell;-fx-cursor:hand;");
         return listView;
     }
 }

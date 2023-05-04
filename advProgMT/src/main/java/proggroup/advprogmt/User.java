@@ -37,7 +37,7 @@ public class User {
     }
 
     public static boolean validate(TextField username, PasswordField password,TextField passShown , Label msg){
-        if (!onClick(username,password,passShown,msg)){
+        if (!checkFields(username,password,passShown,msg)){
             return false;
         }
         boolean matches = false;
@@ -69,7 +69,7 @@ public class User {
         return matches;
     }
 
-    public static boolean onClick(TextField username, PasswordField password,TextField passShown , Label msg) {
+    public static boolean checkFields(TextField username, PasswordField password,TextField passShown , Label msg) {
         if (password.getText().isEmpty())
             password.setText(passShown.getText());
         if (username.getText().isEmpty() && password.getText().isEmpty()) {
@@ -85,7 +85,7 @@ public class User {
             msg.setStyle("-fx-text-fill:red");
             return false;
         }
-            return true;
+        return true;
     }
 
 //    public String getUserData() {

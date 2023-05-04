@@ -32,8 +32,7 @@ public class Reader extends User{
         for (String i: search.booksArr) {
             if (i!= null) {
                 System.out.println("element "+ i + " added");
-                list.add(new Home.HBoxCell(i, "Rent","limegreen"));
-
+                list.add(new Home.HBoxCell(i, "Rent","limegreen","","","Reader"));
             }
         }
         ListView<Home.HBoxCell> listView = new ListView<>();
