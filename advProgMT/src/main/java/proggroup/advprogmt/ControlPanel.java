@@ -38,6 +38,8 @@ public class ControlPanel extends Application {
         mainStage.setTitle("Library System - Control Panel");
         mainStage.setResizable(false);
         mainStage.setScene(new Scene(root, 500, 300));
+        mainStage.setX(100);
+        mainStage.setY(100);
         mainStage.show();
     }
     public void addUser(){

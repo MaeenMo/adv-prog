@@ -92,7 +92,7 @@ public class Home{
         });
         cp.setOnCloseRequest(event -> {
             System.out.println("Stage is closing");
-            controlPanel.root.getChildren().clear();git stas
+            controlPanel.root.getChildren().clear();
             Home.ctrlPanel_opened = false;
         });
 

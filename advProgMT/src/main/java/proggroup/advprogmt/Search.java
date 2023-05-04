@@ -72,9 +72,9 @@ public class Search{
                     for (int i =0;i < lines ;i++)
                     {
                         temp = brs.readLine();
-//                        System.out.println(temp);
+                        System.out.println(temp);
                         if (temp.contains(searchbar.toLowerCase()) || temp.contains(searchbar.toUpperCase()) || searchbar.equals(temp) || searchbar.equals(temp.toLowerCase())){
-//                            System.out.println(temp);
+                            System.out.println(temp);
                             booksArr[i]=temp;
                             System.out.println(booksArr[i]);
 //                            break;
