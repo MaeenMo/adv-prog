@@ -1,0 +1,6 @@
+Username(ID),Password,Type,FirstName,LastName,Address,CellPhone,Email,isBlocked
+Maeen,me,Librarian,Maeen,Mohamed,Maadi,01501631113,maeenmohd@gmail.com,false
+admin,abc123,Librarian,admino,adaminoo,nasrcity,0123456789,admon@gmail.com,false
+user1,123abc,Reader,usero,Useroo,cairo,112233445566,us@gmail.com,false
+user2,123abc,Reader,usero,Useroo,cairo,112233445566,us@gmail.com,true
+1,1,Reader,usero,Useroo,cairo,112233445566,us@gmail.com,false
